@@ -70,7 +70,7 @@ class Trainer(Person):
             raise ValueError("Salary must be a positive number") 
         
     def get_details(self) -> str:
-        return f"[Trainer] {self.name} (ID: {self.person_id}) - Spec: {self.specialization}, Salary: €{self.salary}"
+        return f"[Trainer] {self.name} (ID: {self.person_id}) - Spec: {self.specialization}, Salary: ${self.salary}"
     
 
 class FitnessClub:
@@ -108,6 +108,21 @@ class FitnessClub:
         print(f"Club: {self.club_name}")
         for person in self.members + self.trainers:
             print(person.get_details())
+
+    def save_to_file(self, filename: str):
+        with open(filename, 'w') as f:
+            for person in self.members + self.trainers:
+                f.write(person.get_details() + "\n")
+        print(f"Data successfully saved to {filename}")
+
+    def load_from_file(self, filename: str):
+        try:
+            print(f"\n Loading Data from {filename}")
+            with open(filename, 'r') as f:
+                for line in f:
+                    print(line.strip())
+        except FileNotFoundError:
+            print(f"Error: The file {filename} was not found.")
    
 
 
@@ -123,3 +138,6 @@ if __name__ == "__main__":
     my_club.add_members(m2)
 
     my_club.show_everyone()
+
+    my_club.save_to_file("roster.txt")
+    my_club.load_from_file("roster.txt")
