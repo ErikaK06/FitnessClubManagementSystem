@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Person(ABC):
     def __init__(self, name, person_id):
         self.name = name
@@ -123,21 +124,54 @@ class FitnessClub:
                     print(line.strip())
         except FileNotFoundError:
             print(f"Error: The file {filename} was not found.")
-   
 
+    def interactive_menu(self):
+        path = "FitnessClubManagementSystem/roster.txt"
+
+        while True:
+            print(f"\n {self.club_name} Menu")
+            print("1. Add Member")
+            print("2. Add Trainer")
+            print("3. Show Everyone")
+            print("4. Save to File")
+            print("0. Exit") 
+
+            choice = input("Select an option (0-4): ")
+
+            if choice == "1":
+                try:
+                    name = input("Enter name: ")
+                    member_id = input("Enter ID (M_____): ")
+                    sub = input("Enter Subscription (Annual/Monthly): ")
+                    self.add_members(Member(name, member_id, sub))
+                except ValueError as e: 
+                    print(f"-> Input Error: {e}")
+
+            elif choice == "2":
+                try:
+                    name = input("Enter name: ")
+                    trainer_id = input("Enter ID (T_____): ")
+                    spec = input("Enter Specialization (Joga/Pilatess/Dance/Fitness/Cardio): ")
+                    sal = input("Enter Salary (numbers only): ")
+                    self.add_trainers(Trainer(name, trainer_id, spec, float(sal)))
+                except ValueError as e: 
+                    if "could not convert string to float" in str(e):
+                        print("-> Error: Salary must be a number.")
+                    else:
+                        print(f"-> Input Error: {e}")
+
+            elif choice == "3":
+                self.show_everyone()
+            elif choice == "4":
+                self.save_to_file(path)
+            elif choice == "0":  
+                self.save_to_file(path)
+                print("Exiting program. Goodbye!")
+                break 
+            else:
+                print("-> Invalid choice. Please enter a number from 0 to 4.")
 
 if __name__ == "__main__":
-    my_club = FitnessClub("Super Gym")
-    
-    m1 = Member("Erika", "M12345", "Annual")
-    t1 = Trainer("Alex", "T55555", "Yoga", 1500)
-    m2 = Member("Jessica", "M12345", "Monthly")
-
-    my_club.add_members(m1)
-    my_club.add_trainers(t1)
-    my_club.add_members(m2)
-
-    my_club.show_everyone()
-
-    my_club.save_to_file("FitnessClubManagementSystem/roster.txt")
+    my_club = FitnessClub("FIttnessClub")
     my_club.load_from_file("FitnessClubManagementSystem/roster.txt")
+    my_club.interactive_menu()

@@ -1,2 +1,0 @@
-[Member] Erika (ID: M12345) - Sub: Annual
-[Trainer] Alex (ID: T55555) - Spec: Yoga, Salary: $1500
