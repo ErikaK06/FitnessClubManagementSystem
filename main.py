@@ -84,14 +84,33 @@ class FitnessClub:
     def __init__(self, club_name: str):
         if not hasattr(self, 'initialized'):
             self.club_name = club_name
-            self.initialized = True    
+            self.members = []
+            self.trainers = []
+            self.initialized = True
+
+    def add_members(self, member: Member):
+        if isinstance(member, Member):
+            self.members.append(member)
+
+    def add_trainers(self, trainer: Trainer):
+        if isinstance(trainer, Trainer):
+            self.trainers.append(trainer) 
+
+    def show_everyone(self):
+        print(f"Club: {self.club_name}")
+        for person in self.members + self.trainers:
+            print(person.get_details())   
 
 
 if __name__ == "__main__":
-    club1 = FitnessClub("Super Gym")
-    club2 = FitnessClub("Fake Gym")
-
-    print(f"Club 1 name: {club1.club_name}")
-    print(f"Club 2 name: {club2.club_name}")
+    my_club = FitnessClub("Super Gym")
     
-    print(f"Are club1 and club2 the exact same object? {club1 is club2}")
+    m1 = Member("Erika", "M12345", "Annual")
+    t1 = Trainer("Alex", "T55555", "Yoga", 1500)
+    m2 = Member("Jessica", "M12345", "Monthly")
+
+    my_club.add_members(m1)
+    my_club.add_trainers(t1)
+    my_club.add_members(m2)
+
+    my_club.show_everyone()
