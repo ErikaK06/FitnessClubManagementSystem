@@ -139,5 +139,5 @@ if __name__ == "__main__":
 
     my_club.show_everyone()
 
-    my_club.save_to_file("roster.txt")
-    my_club.load_from_file("roster.txt")
+    my_club.save_to_file("FitnessClubManagementSystem/roster.txt")
+    my_club.load_from_file("FitnessClubManagementSystem/roster.txt")
