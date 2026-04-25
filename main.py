@@ -90,16 +90,25 @@ class FitnessClub:
 
     def add_members(self, member: Member):
         if isinstance(member, Member):
-            self.members.append(member)
+            existing_ids = [p.person_id for p in self.members + self.trainers]
+            if member.person_id in existing_ids:
+                print(f"Error: ID {member.person_id} is already taken!")
+            else:
+                self.members.append(member)
 
     def add_trainers(self, trainer: Trainer):
         if isinstance(trainer, Trainer):
-            self.trainers.append(trainer) 
+            existing_ids = [p.person_id for p in self.members + self.trainers]
+            if trainer.person_id in existing_ids:
+                print(f"Error: ID {trainer.person_id} is already taken!")
+            else:
+                self.trainers.append(trainer) 
 
     def show_everyone(self):
         print(f"Club: {self.club_name}")
         for person in self.members + self.trainers:
-            print(person.get_details())   
+            print(person.get_details())
+   
 
 
 if __name__ == "__main__":
