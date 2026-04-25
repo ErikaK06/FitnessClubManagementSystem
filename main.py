@@ -73,10 +73,25 @@ class Trainer(Person):
         return f"[Trainer] {self.name} (ID: {self.person_id}) - Spec: {self.specialization}, Salary: €{self.salary}"
     
 
-if __name__ == "__main__":
-    m1 = Member("Erika", "M12345", "Annual")
-    t1 = Trainer("Alex", "T55555", "Yoga", 1500)
+class FitnessClub:
+    _instance = None
 
-    print(m1.get_details())
-    print(t1.get_details())
-        
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(FitnessClub, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self, club_name: str):
+        if not hasattr(self, 'initialized'):
+            self.club_name = club_name
+            self.initialized = True    
+
+
+if __name__ == "__main__":
+    club1 = FitnessClub("Super Gym")
+    club2 = FitnessClub("Fake Gym")
+
+    print(f"Club 1 name: {club1.club_name}")
+    print(f"Club 2 name: {club2.club_name}")
+    
+    print(f"Are club1 and club2 the exact same object? {club1 is club2}")
