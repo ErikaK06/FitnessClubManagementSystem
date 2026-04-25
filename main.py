@@ -35,7 +35,10 @@ class Member(Person):
         if len(value) == 6 and value.startswith('M') and value[1:].isdigit():
             self.__person_id = value
         else:
-            raise ValueError("Member ID must start with 'M' followed by 5 digits")      
+            raise ValueError("Member ID must start with 'M' followed by 5 digits")
+
+    def get_details(self) -> str:
+        return f"[Member] {self.name} (ID: {self.person_id}) - Sub: {self.subscription_type}"     
     
 
 class Trainer(Person):
@@ -65,4 +68,15 @@ class Trainer(Person):
             self.__salary = value
         else:
             raise ValueError("Salary must be a positive number") 
+        
+    def get_details(self) -> str:
+        return f"[Trainer] {self.name} (ID: {self.person_id}) - Spec: {self.specialization}, Salary: €{self.salary}"
+    
+
+if __name__ == "__main__":
+    m1 = Member("Erika", "M12345", "Annual")
+    t1 = Trainer("Alex", "T55555", "Yoga", 1500)
+
+    print(m1.get_details())
+    print(t1.get_details())
         
