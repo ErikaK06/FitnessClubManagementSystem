@@ -1,4 +1,6 @@
-class Person:
+from abc import ABC, abstractmethod
+
+class Person(ABC):
     def __init__(self, name, person_id):
         self.name = name
         self.person_id = person_id
@@ -13,6 +15,10 @@ class Person:
             self._name = value
         else:
             raise ValueError("Name cannot be empty")
+        
+    @abstractmethod
+    def get_details(self) -> str:
+        pass
 
     
 class Member(Person):
