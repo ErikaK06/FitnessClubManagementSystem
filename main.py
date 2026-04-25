@@ -56,7 +56,7 @@ class Trainer(Person):
         if len(value) == 6 and value.startswith('T') and value[1:].isdigit():
             self.__person_id = value
         else:
-            raise ValueError("Member ID must start with 'T' followed by 5 digits")
+            raise ValueError("Trainer ID must start with 'T' followed by 5 digits")
 
     @property
     def salary(self):
