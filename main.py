@@ -126,7 +126,7 @@ class FitnessClub:
             print(f"Error: The file {filename} was not found.")
 
     def interactive_menu(self):
-        path = "FitnessClubManagementSystem/roster.txt"
+        path = "roster.txt"
 
         while True:
             print(f"\n {self.club_name} Menu")
@@ -173,5 +173,5 @@ class FitnessClub:
 
 if __name__ == "__main__":
     my_club = FitnessClub("FIttnessClub")
-    my_club.load_from_file("FitnessClubManagementSystem/roster.txt")
+    my_club.load_from_file("roster.txt")
     my_club.interactive_menu()
